@@ -1,148 +1,172 @@
-import { blogApi } from "@/lib/api";
-import Link from "next/link";
-import type { Metadata } from "next";
+import { cookies, headers } from 'next/headers';
+import { blogApi } from '@/lib/api';
+import { PostCard, PostCardCompact } from '@/components/blog/PostCard';
+import { FeaturedPost } from '@/components/blog/FeaturedPost';
+import { BlogSidebar } from '@/components/layout/BlogSidebar';
+import { NewsletterCTA } from '@/components/blog/NewsletterCTA';
+import { getVerticalConfig } from '@/lib/vertical-config';
+import { t } from '@/lib/translations';
+import type { Article } from '@/types/blog';
 
 export const revalidate = 60;
 
-const LANG_LABELS: Record<string, string> = { tr: "Türkçe", en: "English", de: "Deutsch", fr: "Français", es: "Español" };
+const VERTICAL = 'realestate';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://realestate-blog.gmoplus.com';
 
-export async function generateMetadata({ searchParams }: { searchParams: Promise<{ lang?: string }> }): Promise<Metadata> {
-  const { lang } = await searchParams;
-  const langLabel = lang ? ` (${LANG_LABELS[lang] ?? lang.toUpperCase()})` : "";
-  return {
-    title: `GMOPlus Emlak Blog${langLabel}`,
-    description: "Gayrimenkul haberleri, ev satın alma rehberleri ve piyasa analizleri",
-    alternates: {
-      languages: { tr: "/?lang=tr", en: "/?lang=en", de: "/?lang=de", fr: "/?lang=fr", es: "/?lang=es" },
-    },
-  };
-}
+export default async function HomePage() {
+  const cookieStore = await cookies();
+  const headersList = await headers();
+  const language = headersList.get('x-language') || cookieStore.get('language')?.value;
+  const config = getVerticalConfig(VERTICAL);
 
-function formatDate(d?: string, lang = "tr") {
-  if (!d) return "";
-  const localeMap: Record<string, string> = { tr: "tr-TR", en: "en-US", de: "de-DE", fr: "fr-FR", es: "es-ES" };
-  return new Date(d).toLocaleDateString(localeMap[lang] ?? "tr-TR", { day: "numeric", month: "long", year: "numeric" });
-}
-
-function LangBadge({ lang }: { lang?: string }) {
-  if (!lang) return null;
-  const colors: Record<string, string> = { tr: "bg-red-50 text-red-600", en: "bg-blue-50 text-blue-600", de: "bg-yellow-50 text-yellow-700", fr: "bg-purple-50 text-purple-600", es: "bg-orange-50 text-orange-600" };
-  return <span className={`text-xs font-semibold px-2 py-0.5 rounded ${colors[lang] ?? "bg-gray-50 text-gray-500"}`}>{lang.toUpperCase()}</span>;
-}
-
-function PostCard({ post, lang }: { post: any; lang?: string }) {
-  return (
-    <Link href={`/${post.slug}`} className="group block">
-      {post.coverImageUrl && (
-        <div className="aspect-video bg-gray-100 rounded-xl overflow-hidden mb-3">
-          <img src={post.coverImageUrl} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
-        </div>
-      )}
-      <div className="flex items-center gap-2 mb-1">
-        <LangBadge lang={post.language} />
-      </div>
-      <h2 className="font-bold text-gray-900 group-hover:text-emerald-600 transition-colors line-clamp-2 mb-1">{post.title}</h2>
-      {post.excerpt && <p className="text-sm text-gray-500 line-clamp-2 mb-2">{post.excerpt}</p>}
-      <p className="text-xs text-gray-400">{formatDate(post.publishedAt, lang)} · {post.readingTimeMin} dk okuma</p>
-    </Link>
-  );
-}
-
-export default async function HomePage({ searchParams }: { searchParams: Promise<{ cursor?: string; lang?: string }> }) {
-  const params = await searchParams;
-  const lang = params.lang;
-  let result: any = { items: [], hasMore: false, nextCursor: null };
-  let popular: any[] = [];
+  let posts: Article[] = [];
+  let popular: Article[] = [];
+  let hasMore = false;
+  let nextCursor: string | null = null;
 
   try {
-    const fetchParams: Record<string, any> = { limit: 12 };
-    if (lang) fetchParams.language = lang;
-    if (params.cursor) fetchParams.cursor = params.cursor;
-    [result, popular] = await Promise.all([
-      blogApi.getArticles(fetchParams).catch(() => ({ items: [], hasMore: false, nextCursor: null })),
-      blogApi.getPopular(4).catch(() => []),
+    const [postsData, popularData] = await Promise.all([
+      blogApi.getArticles({ limit: 13, language }),
+      blogApi.getPopular(4),
     ]);
-  } catch {}
+    posts = postsData.items;
+    hasMore = postsData.hasMore;
+    nextCursor = postsData.nextCursor;
+    popular = popularData;
+  } catch {
+    // Graceful fallback
+  }
 
-  const posts: any[] = result?.items ?? [];
-  const [heroPost, ...restPosts] = posts;
+  const featured = posts[0] || null;
+  const gridPosts = posts.slice(1, 10);
+  const morePosts = posts.slice(10);
+
+  const gridIds = new Set(gridPosts.map((p) => p.id));
+  const alsoLike = popular.filter((p) => p.id !== featured?.id && !gridIds.has(p.id)).slice(0, 4);
+
+  const blogJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: config.name,
+    description: `${config.tagline} — expert articles, industry insights, and practical tips.`,
+    url: SITE_URL,
+    publisher: { '@type': 'Organization', name: 'GMOPlus', url: 'https://gmoplus.com' },
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: config.mainSiteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: SITE_URL },
+    ],
+  };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10">
-      {heroPost && (
-        <Link href={`/${heroPost.slug}`} className="group block mb-12">
-          <div className="relative rounded-2xl overflow-hidden bg-emerald-900">
-            {heroPost.coverImageUrl ? (
-              <img src={heroPost.coverImageUrl} alt={heroPost.title} className="w-full h-80 object-cover opacity-60 group-hover:opacity-70 transition-opacity" />
-            ) : (
-              <div className="w-full h-80 bg-gradient-to-br from-emerald-700 to-emerald-900" />
-            )}
-            <div className="absolute inset-0 p-8 flex flex-col justify-end">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-xs font-semibold text-emerald-200 bg-emerald-800/60 px-2.5 py-1 rounded-full backdrop-blur-sm">
-                  EMLAK
-                </span>
-                <LangBadge lang={heroPost.language} />
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+        <nav aria-label="Breadcrumb" className="pt-4 pb-2">
+          <ol className="flex items-center gap-1.5 text-xs text-gray-400">
+            <li>
+              <a href={config.mainSiteUrl} className="hover:text-gray-600 transition-colors">{t(language, 'home')}</a>
+            </li>
+            <li aria-hidden="true">
+              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+            </li>
+            <li>
+              <span className="text-gray-600 font-medium">{t(language, 'blog')}</span>
+            </li>
+          </ol>
+        </nav>
+
+        <header className="pt-4 pb-8 sm:pt-6 sm:pb-10">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-3">
+            {config.tagline}
+          </h1>
+          <p className="text-gray-500 text-base sm:text-lg max-w-2xl leading-relaxed">
+            {t(language, 'expertArticles')} {config.name}.
+          </p>
+        </header>
+
+        {featured && (
+          <section className="mb-10" aria-label="Featured article">
+            <FeaturedPost post={featured} language={language} />
+          </section>
+        )}
+
+        <div className="lg:grid lg:grid-cols-[1fr_300px] lg:gap-10">
+          <div>
+            {gridPosts.length > 0 ? (
+              <>
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-lg font-bold text-gray-900">{t(language, 'latestArticles')}</h2>
+                  <div className="h-px flex-1 bg-gray-100 ml-4" />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {gridPosts.map((post) => (
+                    <PostCard key={post.id} post={post} language={language} />
+                  ))}
+                </div>
+              </>
+            ) : !featured ? (
+              <div className="text-center py-24">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" /></svg>
+                </div>
+                <p className="text-lg font-medium text-gray-400">{t(language, 'noArticlesYet')}</p>
+                <p className="text-sm text-gray-400 mt-1">{t(language, 'checkBackSoon')}</p>
               </div>
-              <h1 className="text-3xl font-extrabold text-white leading-tight mb-2 drop-shadow">{heroPost.title}</h1>
-              {heroPost.excerpt && <p className="text-sm text-emerald-100 line-clamp-2">{heroPost.excerpt}</p>}
-              <p className="text-xs text-emerald-200 mt-3">{formatDate(heroPost.publishedAt, lang)} · {heroPost.readingTimeMin} dk</p>
-            </div>
-          </div>
-        </Link>
-      )}
+            ) : null}
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
-          {restPosts.length === 0 && !heroPost && (
-            <div className="text-center py-20 text-gray-400">
-              <p className="text-2xl mb-2">🏠</p>
-              <p className="font-medium">Henüz makale yok</p>
-              <p className="text-sm mt-1">Yakında içerikler eklenecek</p>
-            </div>
-          )}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {restPosts.map((p) => <PostCard key={p._id} post={p} lang={lang} />)}
-          </div>
-          {result?.hasMore && result?.nextCursor && (
-            <div className="mt-10 text-center">
-              <Link
-                href={`/?cursor=${result.nextCursor}${lang ? `&lang=${lang}` : ""}`}
-                className="inline-flex items-center gap-2 px-6 py-2.5 bg-emerald-600 text-white text-sm font-medium rounded-xl hover:bg-emerald-700 transition-colors"
-              >
-                Daha Fazla Yükle
-              </Link>
-            </div>
-          )}
-        </div>
-
-        <aside className="space-y-8">
-          {popular.length > 0 && (
-            <div>
-              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Popüler</h3>
-              <div className="space-y-4">
-                {popular.map((p: any, i: number) => (
-                  <Link key={p._id} href={`/${p.slug}`} className="flex gap-3 group">
-                    <span className="text-2xl font-black text-emerald-100 w-6 shrink-0">{i + 1}</span>
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-800 group-hover:text-emerald-600 transition-colors line-clamp-2">{p.title}</h4>
-                      <p className="text-xs text-gray-400 mt-0.5">{p.readingTimeMin} dk</p>
-                    </div>
-                  </Link>
+            {morePosts.length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+                {morePosts.map((post) => (
+                  <PostCard key={post.id} post={post} language={language} />
                 ))}
               </div>
-            </div>
-          )}
+            )}
 
-          <div className="bg-emerald-50 rounded-xl p-5">
-            <h3 className="text-sm font-bold text-emerald-900 mb-2">Emlak platformuna gidin</h3>
-            <p className="text-xs text-emerald-700 mb-3">Kiralık ve satılık ilanlar, değer analizleri ve daha fazlası.</p>
-            <a href="https://realestate.gmoplus.com" className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-600 hover:text-emerald-700">
-              realestate.gmoplus.com →
-            </a>
+            {hasMore && (
+              <div className="mt-10 text-center">
+                <a
+                  href={`/?cursor=${nextCursor}`}
+                  className="inline-flex items-center gap-2 px-8 py-3 bg-white border border-gray-200 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all"
+                >
+                  {t(language, 'loadMore')}
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                </a>
+              </div>
+            )}
           </div>
-        </aside>
+
+          <aside className="hidden lg:block" aria-label="Sidebar">
+            <div className="sticky top-20">
+              <BlogSidebar vertical={VERTICAL} language={language} />
+            </div>
+          </aside>
+        </div>
+
+        <section className="my-14" aria-label="Newsletter subscription">
+          <NewsletterCTA variant="inline" language={language} />
+        </section>
+
+        {alsoLike.length > 0 && (
+          <section className="pb-14" aria-label="Recommended articles">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-lg font-bold text-gray-900">{t(language, 'youMayAlsoLike')}</h2>
+              <div className="h-px flex-1 bg-gray-100 ml-4" />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {alsoLike.map((post) => (
+                <PostCardCompact key={post.id} post={post} language={language} />
+              ))}
+            </div>
+          </section>
+        )}
       </div>
-    </div>
+    </>
   );
 }

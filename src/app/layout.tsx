@@ -1,56 +1,65 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata, Viewport } from 'next';
+import { cookies, headers } from 'next/headers';
+import { BlogHeader } from '@/components/layout/BlogHeader';
+import { BlogFooter } from '@/components/layout/BlogFooter';
+import { getVerticalConfig } from '@/lib/vertical-config';
+import './globals.css';
 
-export const metadata: Metadata = {
-  title: { default: "GMOPlus Emlak Blog", template: "%s | GMOPlus Emlak Blog" },
-  description: "GMOPlus Emlak Blog — Gayrimenkul haberleri, ev satın alma rehberleri, piyasa analizleri ve daha fazlası",
-  openGraph: { siteName: "GMOPlus Emlak Blog", type: "website" },
-  robots: { index: true, follow: true },
+const VERTICAL = 'realestate';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const config = getVerticalConfig(VERTICAL);
+
+  return {
+    title: {
+      default: `${config.name} — ${config.tagline}`,
+      template: `%s — ${config.name}`,
+    },
+    description: `Your trusted source for the latest ${config.tagline.toLowerCase()} on ${config.name}.`,
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_SITE_URL || 'https://realestate-blog.gmoplus.com',
+    ),
+    icons: {
+      icon: '/favicon.ico',
+      apple: '/logo.png',
+    },
+    openGraph: {
+      siteName: config.name,
+      locale: 'en_US',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#EA580C',
 };
 
-const LANGS = [
-  { code: "tr", label: "TR" },
-  { code: "en", label: "EN" },
-  { code: "de", label: "DE" },
-  { code: "fr", label: "FR" },
-  { code: "es", label: "ES" },
-];
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const cookieStore = await cookies();
+  const headersList = await headers();
+  const language = headersList.get('x-language') || cookieStore.get('language')?.value;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="tr">
-      <body className="bg-white text-gray-900 antialiased">
-        <header className="border-b border-gray-100 sticky top-0 bg-white/95 backdrop-blur-sm z-40">
-          <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
-            <a href="/" className="font-bold text-lg text-gray-900 flex items-center gap-2">
-              <span className="w-7 h-7 bg-emerald-600 rounded-lg flex items-center justify-center text-white text-xs font-black">E</span>
-              GMOPlus <span className="text-emerald-600">Emlak Blog</span>
-            </a>
-            <nav className="flex items-center gap-4 text-sm text-gray-600">
-              <a href="/" className="hover:text-gray-900 transition-colors">Ana Sayfa</a>
-              <a href="/kategoriler" className="hover:text-gray-900 transition-colors">Kategoriler</a>
-              <a href="https://realestate.gmoplus.com" className="hover:text-emerald-600 transition-colors text-emerald-500 font-medium">← Emlak</a>
-              <div className="flex items-center gap-0 border border-gray-200 rounded-lg overflow-hidden">
-                {LANGS.map((l) => (
-                  <a
-                    key={l.code}
-                    href={`/?lang=${l.code}`}
-                    className="px-2.5 py-1 text-xs font-medium hover:bg-emerald-50 hover:text-emerald-600 transition-colors border-r border-gray-100 last:border-0"
-                  >
-                    {l.label}
-                  </a>
-                ))}
-              </div>
-            </nav>
-          </div>
-        </header>
-        <main className="min-h-screen">{children}</main>
-        <footer className="border-t border-gray-100 py-8 mt-16">
-          <div className="max-w-5xl mx-auto px-4 text-center text-sm text-gray-400">
-            © {new Date().getFullYear()} GMOPlus Emlak Blog ·{" "}
-            <a href="https://realestate.gmoplus.com" className="hover:text-emerald-600 transition-colors">realestate.gmoplus.com</a>
-          </div>
-        </footer>
+    <html lang={language || 'tr'}>
+      <body className="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+        <BlogHeader vertical={VERTICAL} language={language} />
+        <main className="flex-1">{children}</main>
+        <BlogFooter language={language} />
       </body>
     </html>
   );
