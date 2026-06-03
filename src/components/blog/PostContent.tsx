@@ -5,8 +5,8 @@ import DOMPurify from 'isomorphic-dompurify';
 export function PostContent({ html }: { html: string }) {
   // Sanitize HTML to prevent XSS attacks
   const sanitizedHtml = DOMPurify.sanitize(html, {
-    ADD_TAGS: ['iframe'],
-    ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling', 'target'],
+    ADD_TAGS: [],
+    ADD_ATTR: [],
   });
 
   return (
