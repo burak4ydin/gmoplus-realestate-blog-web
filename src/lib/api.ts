@@ -1,7 +1,7 @@
 const BLOG_API = process.env.NEXT_PUBLIC_BLOG_API_URL || "https://blog-api.gmoplus.com/api/v1";
 export const VERTICAL = "realestate";
 
-const SLUG_RE = /^[a-z0-9][a-z0-9-]*[a-z0-9]$/;
+const SLUG_RE = /^[a-z0-9]([a-z0-9-]{0,98}[a-z0-9])?$/;
 
 async function apiFetch(path: string, options?: RequestInit) {
   const res = await fetch(`${BLOG_API}${path}`, {
