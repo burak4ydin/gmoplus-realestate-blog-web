@@ -66,7 +66,7 @@ export async function BlogSidebar({ vertical, language }: { vertical?: string; l
                         <span className="text-[11px] text-gray-400">{post.readingTimeMin} {t(language, 'minRead')}</span>
                       )}
                       <span className="text-[11px] text-gray-400">
-                        {post.readCount.toLocaleString(locale)} {t(language, 'views')}
+                        {(post.viewCount ?? 0).toLocaleString(locale)} {t(language, 'views')}
                       </span>
                     </div>
                   </div>
