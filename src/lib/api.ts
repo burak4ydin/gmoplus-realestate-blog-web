@@ -36,4 +36,31 @@ export const blogApi = {
     const data = await apiFetch(`/blog/categories?vertical=${VERTICAL}`);
     return data.data.categories;
   },
+
+  async getTags(limit = 20) {
+    const qs = new URLSearchParams({ vertical: VERTICAL, limit: String(limit) }).toString();
+    const data = await apiFetch(`/blog/tags?${qs}`);
+    return data.data.tags as any[];
+  },
+
+  async getArticlesByCategory(categorySlug: string, params: Record<string, any> = {}) {
+    const merged = { vertical: VERTICAL, categorySlug, limit: 12, ...params };
+    const qs = new URLSearchParams(Object.entries(merged).filter(([, v]) => v != null).map(([k, v]) => [k, String(v)])).toString();
+    const data = await apiFetch(`/blog/posts?${qs}`);
+    return data.data as { items: any[]; hasMore: boolean; nextCursor: string | null };
+  },
+
+  async getArticlesByTag(tagSlug: string, params: Record<string, any> = {}) {
+    const merged = { vertical: VERTICAL, tagSlug, limit: 12, ...params };
+    const qs = new URLSearchParams(Object.entries(merged).filter(([, v]) => v != null).map(([k, v]) => [k, String(v)])).toString();
+    const data = await apiFetch(`/blog/posts?${qs}`);
+    return data.data as { items: any[]; hasMore: boolean; nextCursor: string | null };
+  },
+
+  async getArticlesByAuthor(authorId: string, params: Record<string, any> = {}) {
+    const merged = { vertical: VERTICAL, authorId, limit: 12, ...params };
+    const qs = new URLSearchParams(Object.entries(merged).filter(([, v]) => v != null).map(([k, v]) => [k, String(v)])).toString();
+    const data = await apiFetch(`/blog/posts?${qs}`);
+    return data.data as { items: any[]; hasMore: boolean; nextCursor: string | null };
+  },
 };
