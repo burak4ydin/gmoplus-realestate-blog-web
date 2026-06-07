@@ -42,9 +42,9 @@ export default async function HomePage({
     // Graceful fallback
   }
 
-  const featured = posts[0] || null;
-  const gridPosts = posts.slice(1, 10);
-  const morePosts = posts.slice(10);
+  const featured = posts.find((p) => p.coverImageUrl) || null;
+  const gridPosts = posts.filter((p) => p !== featured).slice(0, 9);
+  const morePosts = posts.filter((p) => p !== featured).slice(9);
 
   const gridIds = new Set(gridPosts.map((p) => p.id));
   const alsoLike = popular.filter((p) => p.id !== featured?.id && !gridIds.has(p.id)).slice(0, 4);
