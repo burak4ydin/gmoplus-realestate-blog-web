@@ -13,10 +13,15 @@ export const revalidate = 60;
 const VERTICAL = 'realestate';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://realestate-blog.gmoplus.com';
 
-export default async function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ language?: string }>;
+}) {
   const cookieStore = await cookies();
   const headersList = await headers();
-  const language = headersList.get('x-language') || cookieStore.get('language')?.value;
+  const params = searchParams ? await searchParams : {};
+  const language = params.language || headersList.get('x-language') || cookieStore.get('language')?.value || 'tr';
   const config = getVerticalConfig(VERTICAL);
 
   let posts: Article[] = [];
