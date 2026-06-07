@@ -3,6 +3,17 @@ import { NextRequest, NextResponse } from 'next/server';
 const SUPPORTED_LANGS = ['tr', 'en', 'de', 'fr', 'es', 'ru'];
 
 export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Redirect root to default locale
+  if (pathname === '/') {
+    const cookieLang = request.cookies.get('language')?.value;
+    const locale = (cookieLang && SUPPORTED_LANGS.includes(cookieLang)) ? cookieLang : 'tr';
+    const url = request.nextUrl.clone();
+    url.pathname = `/${locale}`;
+    return NextResponse.redirect(url);
+  }
+
   const { searchParams } = request.nextUrl;
   const langParam = searchParams.get('language');
 
