@@ -1,0 +1,96 @@
+{
+  "common": {
+    "search": "Suchen",
+    "loading": "Lädt...",
+    "error": "Ein Fehler ist aufgetreten",
+    "notFound": "Nicht gefunden",
+    "back": "Zurück",
+    "close": "Schließen",
+    "all": "Alle",
+    "readMore": "Mehr lesen",
+    "share": "Teilen",
+    "home": "Startseite"
+  },
+  "nav": {
+    "home": "Startseite",
+    "articles": "Artikel",
+    "categories": "Kategorien",
+    "search": "Suchen",
+    "authors": "Autoren"
+  },
+  "blog": {
+    "latestArticles": "Neueste Artikel",
+    "featuredArticles": "Ausgewählte Artikel",
+    "allArticles": "Alle Artikel",
+    "noArticles": "Noch keine Artikel.",
+    "readingTime": "{min} Min. Lesezeit",
+    "publishedAt": "Veröffentlicht",
+    "updatedAt": "Aktualisiert",
+    "author": "Autor",
+    "category": "Kategorie",
+    "tags": "Tags",
+    "comments": "Kommentare",
+    "commentCount": "{count} Kommentare",
+    "relatedArticles": "Verwandte Artikel",
+    "shareArticle": "Artikel teilen",
+    "writtenBy": "Geschrieben von",
+    "postedIn": "Kategorie",
+    "minuteRead": "Minuten Lesezeit"
+  },
+  "search": {
+    "title": "Artikel suchen",
+    "placeholder": "Immobilien, Wohnen, Investition...",
+    "results": "{count} Ergebnisse gefunden",
+    "noResults": "Keine Artikel für Ihre Suche gefunden.",
+    "searchFor": "Suche nach"
+  },
+  "category": {
+    "title": "Kategorie",
+    "allCategories": "Alle Kategorien",
+    "articlesInCategory": "Artikel in dieser Kategorie",
+    "noArticles": "Keine Artikel in dieser Kategorie."
+  },
+  "author": {
+    "title": "Autor",
+    "articles": "Artikel",
+    "articlesBy": "Artikel von",
+    "bio": "Über",
+    "noArticles": "Keine Artikel von diesem Autor."
+  },
+  "tag": {
+    "title": "Tag",
+    "articlesTagged": "Artikel mit diesem Tag",
+    "noArticles": "Keine Artikel mit diesem Tag."
+  },
+  "home": {
+    "metaTitle": "GMOPlus Realestate Blog — Immobiliennachrichten & Ratgeber",
+    "metaDescription": "Immobiliennachrichten, Marktanalysen und Investitionsratgeber aus der Türkei und der Welt.",
+    "heroTitle": "Immobiliennachrichten & Einblicke",
+    "heroSubtitle": "Immobilienmarkttrends, Investitionsberatung und Wohnungsnachrichten"
+  },
+  "realestate": {
+    "marketAnalysis": "Marktanalyse",
+    "investmentGuide": "Investitionsratgeber",
+    "housingTrends": "Wohnungstrends",
+    "propertyTips": "Immobilientipps",
+    "rentalMarket": "Mietmarkt",
+    "buyingGuide": "Kaufratgeber",
+    "mortgage": "Hypothek & Finanzierung",
+    "neighborhoods": "Stadtteilführer",
+    "renovation": "Renovierung & Dekoration",
+    "commercialProperty": "Gewerbeimmobilien"
+  },
+  "errors": {
+    "notFound": "Seite nicht gefunden",
+    "notFoundDesc": "Die gesuchte Seite existiert nicht oder wurde entfernt.",
+    "serverError": "Serverfehler",
+    "backToHome": "Zurück zur Startseite"
+  },
+  "footer": {
+    "rights": "Alle Rechte vorbehalten",
+    "privacy": "Datenschutzrichtlinie",
+    "terms": "Nutzungsbedingungen",
+    "contact": "Kontakt",
+    "about": "Über uns"
+  }
+}

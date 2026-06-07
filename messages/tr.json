@@ -1,0 +1,96 @@
+{
+  "common": {
+    "search": "Ara",
+    "loading": "Yükleniyor...",
+    "error": "Bir hata oluştu",
+    "notFound": "Bulunamadı",
+    "back": "Geri",
+    "close": "Kapat",
+    "all": "Tümü",
+    "readMore": "Devamını Oku",
+    "share": "Paylaş",
+    "home": "Ana Sayfa"
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "articles": "Makaleler",
+    "categories": "Kategoriler",
+    "search": "Ara",
+    "authors": "Yazarlar"
+  },
+  "blog": {
+    "latestArticles": "Son Makaleler",
+    "featuredArticles": "Öne Çıkan Makaleler",
+    "allArticles": "Tüm Makaleler",
+    "noArticles": "Henüz makale yok.",
+    "readingTime": "{min} dk okuma",
+    "publishedAt": "Yayın Tarihi",
+    "updatedAt": "Güncelleme Tarihi",
+    "author": "Yazar",
+    "category": "Kategori",
+    "tags": "Etiketler",
+    "comments": "Yorumlar",
+    "commentCount": "{count} yorum",
+    "relatedArticles": "İlgili Makaleler",
+    "shareArticle": "Makaleyi Paylaş",
+    "writtenBy": "Yazan",
+    "postedIn": "Kategori",
+    "minuteRead": "dakika okuma"
+  },
+  "search": {
+    "title": "Makale Ara",
+    "placeholder": "Emlak, konut, yatırım...",
+    "results": "{count} sonuç bulundu",
+    "noResults": "Aramanıza uygun makale bulunamadı.",
+    "searchFor": "Aranan"
+  },
+  "category": {
+    "title": "Kategori",
+    "allCategories": "Tüm Kategoriler",
+    "articlesInCategory": "Bu kategorideki makaleler",
+    "noArticles": "Bu kategoride makale bulunmuyor."
+  },
+  "author": {
+    "title": "Yazar",
+    "articles": "Makaleler",
+    "articlesBy": "Makaleleri",
+    "bio": "Hakkında",
+    "noArticles": "Bu yazara ait makale bulunmuyor."
+  },
+  "tag": {
+    "title": "Etiket",
+    "articlesTagged": "Bu etiketle etiketlenen makaleler",
+    "noArticles": "Bu etiketle ilgili makale bulunmuyor."
+  },
+  "home": {
+    "metaTitle": "GMOPlus Realestate Blog — Emlak Haberleri ve Rehberleri",
+    "metaDescription": "Türkiye ve dünya genelinde emlak haberleri, piyasa analizleri ve yatırım rehberleri.",
+    "heroTitle": "Gayrimenkul Dünyasından Haberler",
+    "heroSubtitle": "Emlak piyasası, yatırım tavsiyeleri ve konut haberleri"
+  },
+  "realestate": {
+    "marketAnalysis": "Piyasa Analizi",
+    "investmentGuide": "Yatırım Rehberi",
+    "housingTrends": "Konut Trendleri",
+    "propertyTips": "Mülk İpuçları",
+    "rentalMarket": "Kiralık Piyasa",
+    "buyingGuide": "Satın Alma Rehberi",
+    "mortgage": "Mortgage ve Finansman",
+    "neighborhoods": "Mahalle Rehberleri",
+    "renovation": "Tadilat ve Dekorasyon",
+    "commercialProperty": "Ticari Gayrimenkul"
+  },
+  "errors": {
+    "notFound": "Sayfa bulunamadı",
+    "notFoundDesc": "Aradığınız sayfa mevcut değil veya kaldırılmış.",
+    "serverError": "Sunucu hatası",
+    "backToHome": "Ana Sayfaya Dön"
+  },
+  "footer": {
+    "rights": "Tüm hakları saklıdır",
+    "privacy": "Gizlilik Politikası",
+    "terms": "Kullanım Şartları",
+    "contact": "İletişim",
+    "about": "Hakkımızda"
+  }
+}

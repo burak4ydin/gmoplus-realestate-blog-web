@@ -1,0 +1,96 @@
+{
+  "common": {
+    "search": "Search",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "notFound": "Not Found",
+    "back": "Back",
+    "close": "Close",
+    "all": "All",
+    "readMore": "Read More",
+    "share": "Share",
+    "home": "Home"
+  },
+  "nav": {
+    "home": "Home",
+    "articles": "Articles",
+    "categories": "Categories",
+    "search": "Search",
+    "authors": "Authors"
+  },
+  "blog": {
+    "latestArticles": "Latest Articles",
+    "featuredArticles": "Featured Articles",
+    "allArticles": "All Articles",
+    "noArticles": "No articles yet.",
+    "readingTime": "{min} min read",
+    "publishedAt": "Published",
+    "updatedAt": "Updated",
+    "author": "Author",
+    "category": "Category",
+    "tags": "Tags",
+    "comments": "Comments",
+    "commentCount": "{count} comments",
+    "relatedArticles": "Related Articles",
+    "shareArticle": "Share Article",
+    "writtenBy": "Written by",
+    "postedIn": "Category",
+    "minuteRead": "minute read"
+  },
+  "search": {
+    "title": "Search Articles",
+    "placeholder": "Real estate, housing, investment...",
+    "results": "{count} results found",
+    "noResults": "No articles found for your search.",
+    "searchFor": "Search for"
+  },
+  "category": {
+    "title": "Category",
+    "allCategories": "All Categories",
+    "articlesInCategory": "Articles in this category",
+    "noArticles": "No articles in this category."
+  },
+  "author": {
+    "title": "Author",
+    "articles": "Articles",
+    "articlesBy": "Articles by",
+    "bio": "About",
+    "noArticles": "No articles by this author."
+  },
+  "tag": {
+    "title": "Tag",
+    "articlesTagged": "Articles tagged with this tag",
+    "noArticles": "No articles with this tag."
+  },
+  "home": {
+    "metaTitle": "GMOPlus Realestate Blog — Real Estate News & Guides",
+    "metaDescription": "Real estate news, market analyses and investment guides from Turkey and around the world.",
+    "heroTitle": "Real Estate News & Insights",
+    "heroSubtitle": "Property market trends, investment advice and housing news"
+  },
+  "realestate": {
+    "marketAnalysis": "Market Analysis",
+    "investmentGuide": "Investment Guide",
+    "housingTrends": "Housing Trends",
+    "propertyTips": "Property Tips",
+    "rentalMarket": "Rental Market",
+    "buyingGuide": "Buying Guide",
+    "mortgage": "Mortgage & Finance",
+    "neighborhoods": "Neighborhood Guides",
+    "renovation": "Renovation & Decor",
+    "commercialProperty": "Commercial Property"
+  },
+  "errors": {
+    "notFound": "Page not found",
+    "notFoundDesc": "The page you are looking for does not exist or has been removed.",
+    "serverError": "Server error",
+    "backToHome": "Back to Home"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact",
+    "about": "About Us"
+  }
+}

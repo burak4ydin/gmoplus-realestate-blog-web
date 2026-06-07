@@ -1,0 +1,96 @@
+{
+  "common": {
+    "search": "Rechercher",
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "notFound": "Non trouvé",
+    "back": "Retour",
+    "close": "Fermer",
+    "all": "Tout",
+    "readMore": "Lire la suite",
+    "share": "Partager",
+    "home": "Accueil"
+  },
+  "nav": {
+    "home": "Accueil",
+    "articles": "Articles",
+    "categories": "Catégories",
+    "search": "Rechercher",
+    "authors": "Auteurs"
+  },
+  "blog": {
+    "latestArticles": "Derniers Articles",
+    "featuredArticles": "Articles en Vedette",
+    "allArticles": "Tous les Articles",
+    "noArticles": "Pas encore d'articles.",
+    "readingTime": "{min} min de lecture",
+    "publishedAt": "Publié",
+    "updatedAt": "Mis à jour",
+    "author": "Auteur",
+    "category": "Catégorie",
+    "tags": "Tags",
+    "comments": "Commentaires",
+    "commentCount": "{count} commentaires",
+    "relatedArticles": "Articles Connexes",
+    "shareArticle": "Partager l'article",
+    "writtenBy": "Écrit par",
+    "postedIn": "Catégorie",
+    "minuteRead": "minutes de lecture"
+  },
+  "search": {
+    "title": "Rechercher des Articles",
+    "placeholder": "Immobilier, logement, investissement...",
+    "results": "{count} résultats trouvés",
+    "noResults": "Aucun article trouvé pour votre recherche.",
+    "searchFor": "Rechercher"
+  },
+  "category": {
+    "title": "Catégorie",
+    "allCategories": "Toutes les Catégories",
+    "articlesInCategory": "Articles dans cette catégorie",
+    "noArticles": "Aucun article dans cette catégorie."
+  },
+  "author": {
+    "title": "Auteur",
+    "articles": "Articles",
+    "articlesBy": "Articles de",
+    "bio": "À propos",
+    "noArticles": "Aucun article de cet auteur."
+  },
+  "tag": {
+    "title": "Tag",
+    "articlesTagged": "Articles avec ce tag",
+    "noArticles": "Aucun article avec ce tag."
+  },
+  "home": {
+    "metaTitle": "GMOPlus Realestate Blog — Actualités et Guides Immobiliers",
+    "metaDescription": "Actualités immobilières, analyses de marché et guides d'investissement de Turquie et du monde.",
+    "heroTitle": "Actualités et Insights Immobiliers",
+    "heroSubtitle": "Tendances du marché immobilier, conseils d'investissement et actualités logement"
+  },
+  "realestate": {
+    "marketAnalysis": "Analyse de Marché",
+    "investmentGuide": "Guide d'Investissement",
+    "housingTrends": "Tendances du Logement",
+    "propertyTips": "Conseils Immobiliers",
+    "rentalMarket": "Marché Locatif",
+    "buyingGuide": "Guide d'Achat",
+    "mortgage": "Hypothèque et Financement",
+    "neighborhoods": "Guides de Quartiers",
+    "renovation": "Rénovation et Décoration",
+    "commercialProperty": "Immobilier Commercial"
+  },
+  "errors": {
+    "notFound": "Page non trouvée",
+    "notFoundDesc": "La page que vous cherchez n'existe pas ou a été supprimée.",
+    "serverError": "Erreur serveur",
+    "backToHome": "Retour à l'accueil"
+  },
+  "footer": {
+    "rights": "Tous droits réservés",
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation",
+    "contact": "Contact",
+    "about": "À Propos"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "common": {
+    "search": "Поиск",
+    "loading": "Загрузка...",
+    "error": "Произошла ошибка",
+    "notFound": "Не найдено",
+    "back": "Назад",
+    "close": "Закрыть",
+    "all": "Все",
+    "readMore": "Читать далее",
+    "share": "Поделиться",
+    "home": "Главная"
+  },
+  "nav": {
+    "home": "Главная",
+    "articles": "Статьи",
+    "categories": "Категории",
+    "search": "Поиск",
+    "authors": "Авторы"
+  },
+  "blog": {
+    "latestArticles": "Последние Статьи",
+    "featuredArticles": "Избранные Статьи",
+    "allArticles": "Все Статьи",
+    "noArticles": "Статей пока нет.",
+    "readingTime": "{min} мин чтения",
+    "publishedAt": "Опубликовано",
+    "updatedAt": "Обновлено",
+    "author": "Автор",
+    "category": "Категория",
+    "tags": "Теги",
+    "comments": "Комментарии",
+    "commentCount": "{count} комментариев",
+    "relatedArticles": "Похожие Статьи",
+    "shareArticle": "Поделиться Статьёй",
+    "writtenBy": "Автор",
+    "postedIn": "Категория",
+    "minuteRead": "минут чтения"
+  },
+  "search": {
+    "title": "Поиск Статей",
+    "placeholder": "Недвижимость, жильё, инвестиции...",
+    "results": "Найдено {count} результатов",
+    "noResults": "По вашему запросу статьи не найдены.",
+    "searchFor": "Поиск"
+  },
+  "category": {
+    "title": "Категория",
+    "allCategories": "Все Категории",
+    "articlesInCategory": "Статьи в этой категории",
+    "noArticles": "В этой категории нет статей."
+  },
+  "author": {
+    "title": "Автор",
+    "articles": "Статьи",
+    "articlesBy": "Статьи автора",
+    "bio": "О себе",
+    "noArticles": "У этого автора нет статей."
+  },
+  "tag": {
+    "title": "Тег",
+    "articlesTagged": "Статьи с этим тегом",
+    "noArticles": "Статей с этим тегом нет."
+  },
+  "home": {
+    "metaTitle": "GMOPlus Realestate Блог — Новости и Руководства по Недвижимости",
+    "metaDescription": "Новости рынка недвижимости, анализ рынка и инвестиционные руководства из Турции и мира.",
+    "heroTitle": "Новости и Аналитика Недвижимости",
+    "heroSubtitle": "Тенденции рынка, инвестиционные советы и жилищные новости"
+  },
+  "realestate": {
+    "marketAnalysis": "Анализ Рынка",
+    "investmentGuide": "Инвестиционное Руководство",
+    "housingTrends": "Тенденции Жилья",
+    "propertyTips": "Советы по Недвижимости",
+    "rentalMarket": "Рынок Аренды",
+    "buyingGuide": "Руководство по Покупке",
+    "mortgage": "Ипотека и Финансирование",
+    "neighborhoods": "Гиды по Районам",
+    "renovation": "Ремонт и Декор",
+    "commercialProperty": "Коммерческая Недвижимость"
+  },
+  "errors": {
+    "notFound": "Страница не найдена",
+    "notFoundDesc": "Страница, которую вы ищете, не существует или была удалена.",
+    "serverError": "Ошибка сервера",
+    "backToHome": "На главную"
+  },
+  "footer": {
+    "rights": "Все права защищены",
+    "privacy": "Политика Конфиденциальности",
+    "terms": "Условия использования",
+    "contact": "Контакты",
+    "about": "О нас"
+  }
+}
