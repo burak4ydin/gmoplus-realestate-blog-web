@@ -42,7 +42,7 @@ export function PostHeader({ post, language }: { post: Article; language?: strin
             {post.difficulty}
           </span>
         )}
-        <span className="text-sm text-gray-500">{(post.viewCount ?? 0).toLocaleString(locale)} {t(language, 'views')}</span>
+        <span className="text-sm text-gray-500">{(post.readCount ?? 0).toLocaleString(locale)} {t(language, 'views')}</span>
       </div>
 
       {/* Title */}
