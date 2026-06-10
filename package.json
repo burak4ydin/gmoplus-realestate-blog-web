@@ -2,9 +2,9 @@
   "name": "gmoplus-realestate-blog-web",
   "version": "0.1.0",
   "scripts": {
-    "dev": "next dev -p 3013",
+    "dev": "next dev -p 3016",
     "build": "next build",
-    "start": "next start -p 3013",
+    "start": "next start -p 3016",
     "lint": "next lint"
   },
   "dependencies": {
