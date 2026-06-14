@@ -28,6 +28,8 @@ function flatten(obj: Messages): Record<string, string> {
   return result;
 }
 
+export const SUPPORTED_LANGUAGES = Object.keys(messages);
+
 export function t(language: string, key: string): string {
   const lang = language in messages ? language : 'tr';
   const flat = flatten(messages[lang] as Messages);

@@ -11,7 +11,7 @@ function formatDate(dateStr: string, locale?: string): string {
 }
 
 export function FeaturedPost({ post, language }: { post: Article; language?: string }) {
-  const locale = getLocale(language);
+  const locale = getLocale(language ?? 'tr');
 
   return (
     <article className="relative rounded-2xl overflow-hidden group">
