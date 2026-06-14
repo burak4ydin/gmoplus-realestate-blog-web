@@ -31,14 +31,14 @@ export function BlogFooter({ language }: { language?: string }) {
               <span className="font-bold text-white text-sm">GMOPlus Gayrimenkul Blog</span>
             </div>
             <p className="text-sm leading-relaxed">
-              {t(language, 'blogDescription')}
+              {t(language ?? 'tr', 'blogDescription')}
             </p>
           </div>
 
           {/* Ecosystem */}
           <div>
             <h3 className="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-4">
-              {t(language, 'ecosystem')}
+              {t(language ?? 'tr', 'ecosystem')}
             </h3>
             <ul className="space-y-2">
               {ECOSYSTEM_LINKS.map((link) => (
@@ -57,7 +57,7 @@ export function BlogFooter({ language }: { language?: string }) {
           {/* Legal */}
           <div>
             <h3 className="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-4">
-              {t(language, 'legal')}
+              {t(language ?? 'tr', 'legal')}
             </h3>
             <ul className="space-y-2">
               {LEGAL_LINKS.map((link) => (
@@ -66,7 +66,7 @@ export function BlogFooter({ language }: { language?: string }) {
                     href={link.href}
                     className="text-sm hover:text-white transition-colors"
                   >
-                    {t(language, link.labelKey)}
+                    {t(language ?? 'tr', link.labelKey)}
                   </Link>
                 </li>
               ))}
@@ -75,7 +75,7 @@ export function BlogFooter({ language }: { language?: string }) {
         </div>
 
         <div className="border-t border-gray-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-          <span>© {year} GMOPlus Gayrimenkul Blog · {t(language, 'allRightsReserved')}</span>
+          <span>© {year} GMOPlus Gayrimenkul Blog · {t(language ?? 'tr', 'allRightsReserved')}</span>
           <a href="https://gmoplus.com" className="hover:text-white transition-colors">
             gmoplus.com
           </a>

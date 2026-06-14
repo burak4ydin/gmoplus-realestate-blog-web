@@ -40,16 +40,16 @@ export async function BlogSidebar({ vertical, language }: { vertical?: string; l
     // Graceful degradation if API is down
   }
 
-  const locale = getLocale(language);
+  const locale = getLocale(language ?? 'tr');
 
   return (
     <aside className="space-y-6">
       {/* Search */}
-      <SidebarSearch placeholder={t(language, 'searchArticles')} />
+      <SidebarSearch placeholder={t(language ?? 'tr', 'searchArticles')} />
 
       {/* Popular Posts */}
       {popular.length > 0 && (
-        <SidebarSection title={t(language, 'trending')}>
+        <SidebarSection title={t(language ?? 'tr', 'trending')}>
           <ul className="space-y-4">
             {popular.map((post, i) => (
               <li key={post.id}>
@@ -63,10 +63,10 @@ export async function BlogSidebar({ vertical, language }: { vertical?: string; l
                     </span>
                     <div className="flex items-center gap-2 mt-1">
                       {post.readingTimeMin && (
-                        <span className="text-[11px] text-gray-400">{post.readingTimeMin} {t(language, 'minRead')}</span>
+                        <span className="text-[11px] text-gray-400">{post.readingTimeMin} {t(language ?? 'tr', 'minRead')}</span>
                       )}
                       <span className="text-[11px] text-gray-400">
-                        {(post.readCount ?? 0).toLocaleString(locale)} {t(language, 'views')}
+                        {(post.readCount ?? 0).toLocaleString(locale)} {t(language ?? 'tr', 'views')}
                       </span>
                     </div>
                   </div>
@@ -79,7 +79,7 @@ export async function BlogSidebar({ vertical, language }: { vertical?: string; l
 
       {/* Categories */}
       {categories.length > 0 && (
-        <SidebarSection title={t(language, 'categories')}>
+        <SidebarSection title={t(language ?? 'tr', 'categories')}>
           <ul className="space-y-1.5">
             {categories.map((cat) => (
               <li key={cat.id}>

@@ -107,7 +107,7 @@ export function BlogHeader({ vertical, language }: BlogHeaderProps) {
             <form onSubmit={handleSearch} className="relative">
               <input
                 type="text"
-                placeholder={t(language, 'searchArticles')}
+                placeholder={t(language ?? 'tr', 'searchArticles')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 autoFocus
