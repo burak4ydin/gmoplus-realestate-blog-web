@@ -5,7 +5,7 @@ import { TagList } from './TagList';
 import { t, getLocale } from '@/lib/translations';
 
 export function PostHeader({ post, language }: { post: Article; language?: string }) {
-  const locale = getLocale(language);
+  const locale = getLocale(language ?? 'tr');
   const date = post.publishedAt
     ? new Date(post.publishedAt).toLocaleDateString(locale, {
         year: 'numeric',
@@ -18,7 +18,7 @@ export function PostHeader({ post, language }: { post: Article; language?: strin
     <header className="mb-8">
       {/* Breadcrumb */}
       <nav className="text-sm text-gray-500 mb-4 flex flex-wrap items-center gap-1">
-        <Link href="/" className="hover:text-brand-600">{t(language, 'home')}</Link>
+        <Link href="/" className="hover:text-brand-600">{t(language ?? 'tr', 'home')}</Link>
         <span>/</span>
         {post.category && (
           <>
@@ -35,14 +35,14 @@ export function PostHeader({ post, language }: { post: Article; language?: strin
       <div className="flex items-center gap-3 mb-4">
         {post.category && <CategoryBadge category={post.category} size="md" />}
         {post.readingTimeMin && (
-          <span className="text-sm text-gray-500">{post.readingTimeMin} {t(language, 'minRead')}</span>
+          <span className="text-sm text-gray-500">{post.readingTimeMin} {t(language ?? 'tr', 'minRead')}</span>
         )}
         {post.difficulty && (
           <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 capitalize">
             {post.difficulty}
           </span>
         )}
-        <span className="text-sm text-gray-500">{(post.readCount ?? 0).toLocaleString(locale)} {t(language, 'views')}</span>
+        <span className="text-sm text-gray-500">{(post.readCount ?? 0).toLocaleString(locale)} {t(language ?? 'tr', 'views')}</span>
       </div>
 
       {/* Title */}
@@ -63,7 +63,7 @@ export function PostHeader({ post, language }: { post: Article; language?: strin
       {/* Badges */}
       <div className="flex items-center gap-2 mb-4">
         {post.isEditorPick && (
-          <span className="text-xs font-medium text-amber-700 bg-amber-50 px-2 py-1 rounded-full">{t(language, 'editorsPick')}</span>
+          <span className="text-xs font-medium text-amber-700 bg-amber-50 px-2 py-1 rounded-full">{t(language ?? 'tr', 'editorsPick')}</span>
         )}
         {post.isPremium && (
           <span className="text-xs font-medium text-purple-700 bg-purple-50 px-2 py-1 rounded-full">Premium</span>
