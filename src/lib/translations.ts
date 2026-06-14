@@ -28,7 +28,15 @@ function flatten(obj: Messages): Record<string, string> {
   return result;
 }
 
-export const SUPPORTED_LANGUAGES = Object.keys(messages);
+
+export const SUPPORTED_LANGUAGES = [
+  { code: "tr", label: "Türkçe", flag: "🇹🇷" },
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "de", label: "Deutsch", flag: "🇩🇪" },
+  { code: "fr", label: "Français", flag: "🇫🇷" },
+  { code: "es", label: "Español", flag: "🇪🇸" },
+  { code: "ru", label: "Русский", flag: "🇷🇺" },
+];
 
 export function t(language: string, key: string): string {
   const lang = language in messages ? language : 'tr';
